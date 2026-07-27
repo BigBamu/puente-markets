@@ -1,14 +1,10 @@
 {
-  "name": "puente-markets-mvp",
-  "version": "0.1.0",
+  "name": "puente-markets",
+  "version": "0.2.0",
   "private": true,
-  "description": "Puente Markets — private Polymarket simulator and market signal dashboard",
   "type": "module",
-  "scripts": {
-    "start": "node server.mjs",
-    "check": "node --check app.js && node --check server.mjs && node --check api/markets.js && node --check api/orderbook.js"
-  },
+  "description": "Puente Markets — private Polymarket simulation dashboard",
   "engines": {
-    "node": ">=18"
+    "node": "24.x"
   }
 }
