@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#080b0a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Puente Markets" />
+  <title>Puente Markets</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">PM</div><div><h1>Puente Markets</h1><p>Private market terminal</p></div></div>
+      <button id="refreshBtn" class="icon-btn" aria-label="Uppdatera">↻</button>
+    </header>
+
+    <main>
+      <section id="dashboard" class="view active">
+        <div class="status-row"><span id="liveDot" class="live-dot"></span><span id="sourceLabel">Ansluter till Polymarket…</span><span id="updatedAt" class="muted"></span></div>
+        <div class="hero-card">
+          <div><span class="eyebrow">Virtuell portfölj</span><h2 id="portfolioValue">$10.00</h2><p id="portfolioChange" class="positive">$0.00 · 0.00%</p></div>
+          <div class="hero-badge">SIM</div>
+        </div>
+        <div class="metrics-grid">
+          <article class="metric"><span>Tillgängligt</span><strong id="cashValue">$10.00</strong></article>
+          <article class="metric"><span>Öppna</span><strong id="openCount">0</strong></article>
+          <article class="metric"><span>Marknader</span><strong id="marketCount">0</strong></article>
+          <article class="metric"><span>Realiserat</span><strong id="realizedValue">$0.00</strong></article>
+        </div>
+        <div class="section-head"><div><span class="eyebrow">AI Signals</span><h3>Bästa marknadssignalerna</h3></div><button class="text-btn" data-nav="signals">Visa alla</button></div>
+        <div id="dashboardSignals" class="stack"></div>
+        <div class="notice"><strong>Testversion:</strong> Signalerna i denna MVP bygger på pris, spread, likviditet och marknadsrörelse. En riktig sportstatistikmodell kopplas in i nästa fas.</div>
+      </section>
+
+      <section id="markets" class="view">
+        <div class="page-title"><span class="eyebrow">Live feed</span><h2>Fotbollsmarknader</h2><p>Marknader som appen automatiskt hittar på Polymarket.</p></div>
+        <div class="toolbar"><input id="marketSearch" type="search" placeholder="Sök lag, spelare eller marknad…" /><select id="marketFilter"><option value="all">Alla typer</option><option value="moneyline">Matchvinnare</option><option value="totals">Över/under</option><option value="props">Spelare & övrigt</option></select></div>
+        <div id="marketsList" class="stack"></div>
+      </section>
+
+      <section id="signals" class="view">
+        <div class="page-title"><span class="eyebrow">Signal engine</span><h2>Köp- och säljbevakning</h2><p>Du bestämmer alltid själv över riktiga pengar.</p></div>
+        <div class="action-card"><div><strong>Webbläsarnotiser</strong><p>Ger varningar medan appen är öppen eller aktiv.</p></div><button id="notifyBtn" class="primary-btn">Aktivera</button></div>
+        <div id="signalsList" class="stack"></div>
+      </section>
+
+      <section id="portfolio" class="view">
+        <div class="page-title"><span class="eyebrow">Simulated account</span><h2>Portfölj</h2><p>Alla köp och försäljningar sparas endast på din enhet.</p></div>
+        <div id="positionsList" class="stack"></div>
+        <div class="section-head"><h3>Historik</h3></div>
+        <div id="historyList" class="stack compact"></div>
+      </section>
+
+      <section id="settings" class="view">
+        <div class="page-title"><span class="eyebrow">Kontroll</span><h2>Inställningar</h2><p>Riskregler för den virtuella portföljen.</p></div>
+        <div class="settings-card">
+          <label><span>Max per position</span><strong id="maxPositionLabel">5%</strong><input id="maxPosition" type="range" min="1" max="20" value="5" /></label>
+          <label><span>Säljvarning vid vinst</span><strong id="profitAlertLabel">20%</strong><input id="profitAlert" type="range" min="5" max="100" step="5" value="20" /></label>
+          <label class="switch-row"><span><strong>Auto-simulering</strong><small>Appen får lägga högst ett virtuellt testköp per uppdatering.</small></span><input id="autopilot" type="checkbox" /></label>
+        </div>
+        <button id="runAutopilotBtn" class="primary-btn full">Kör ett AI-test nu</button>
+        <button id="resetBtn" class="danger-btn full">Nollställ virtuell portfölj</button>
+        <div class="notice"><strong>Ingen wallet är ansluten.</strong> Appen kan inte placera riktiga order och innehåller inga privata nycklar.</div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Huvudmeny">
+      <button class="nav-item active" data-nav="dashboard"><span>⌂</span>Hem</button>
+      <button class="nav-item" data-nav="markets"><span>⌁</span>Markets</button>
+      <button class="nav-item" data-nav="signals"><span>⚡</span>Signals</button>
+      <button class="nav-item" data-nav="portfolio"><span>◫</span>Portfolio</button>
+      <button class="nav-item" data-nav="settings"><span>⚙</span>Settings</button>
+    </nav>
+  </div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true"><div class="modal-card"><button id="modalClose" class="modal-close">×</button><div id="modalContent"></div></div></div>
+  <div id="toast" class="toast hidden"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
